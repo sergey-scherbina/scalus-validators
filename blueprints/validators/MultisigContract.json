@@ -1,0 +1,46 @@
+{
+  "preamble": {
+    "title": "Multisig",
+    "description": "A treasury spent by any threshold of its signers.",
+    "version": "0.1.0",
+    "compiler": {
+      "name": "scalus",
+      "version": "1.4.0"
+    },
+    "plutusVersion": "v3",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "Multisig",
+      "description": "A treasury spent by any threshold of its signers.",
+      "redeemer": {
+        "schema": {
+          "dataType": "#unit"
+        }
+      },
+      "datum": {
+        "title": "MultisigDatum",
+        "schema": {
+          "dataType": "constructor",
+          "title": "MultisigDatum",
+          "fields": [
+            {
+              "dataType": "list",
+              "title": "signers"
+            },
+            {
+              "dataType": "integer",
+              "title": "threshold"
+            }
+          ]
+        }
+      },
+      "compiledCode": "58cc0101009800abd8aab9daba1aab9eaba24888888c8ca4c01c0066c90034c8c8ca4cdc48011bad33229800911480148a600200b00199911ba8930080018014cdc000124004375a006004802a002801530101000048c0040046eb0c024cc02d201030083754601200a4664466460020024520032293375e00400b33004004001a515280008dd618050021ba9375c0036a4c9337109000000da930dd69803980280098029baa329300800198039803000d86ea8c018c010c014006d6b586ea8c014cc01d20040013003375400201",
+      "hash": "dcc66e65e75e011e94092cf7cbe137ff3c82ce08a41f5d42185c93d5"
+    }
+  ],
+  "scalus": {
+    "scalaVersion": "3.9.0"
+  }
+}

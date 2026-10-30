@@ -1,0 +1,75 @@
+{
+  "preamble": {
+    "title": "One-shot NFT",
+    "description": "A minting policy parameterized by a seed UTxO: it can mint one token, once.",
+    "version": "0.1.0",
+    "compiler": {
+      "name": "scalus",
+      "version": "1.4.0"
+    },
+    "plutusVersion": "v3",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "One-shot NFT",
+      "description": "A minting policy parameterized by a seed UTxO: it can mint one token, once.",
+      "redeemer": {
+        "title": "NftAction",
+        "schema": {
+          "title": "NftAction",
+          "anyOf": [
+            {
+              "dataType": "constructor",
+              "title": "Mint",
+              "index": 0,
+              "fields": [
+                {
+                  "dataType": "bytes",
+                  "title": "name"
+                }
+              ]
+            },
+            {
+              "dataType": "constructor",
+              "title": "Burn",
+              "index": 1,
+              "fields": [
+                
+              ]
+            }
+          ]
+        }
+      },
+      "datum": {
+        "schema": {
+          "dataType": "#unit"
+        }
+      },
+      "parameters": [
+        {
+          "title": "TxOutRef",
+          "schema": {
+            "dataType": "constructor",
+            "title": "TxOutRef",
+            "fields": [
+              {
+                "dataType": "bytes",
+                "title": "id"
+              },
+              {
+                "dataType": "integer",
+                "title": "idx"
+              }
+            ]
+          }
+        }
+      ],
+      "compiledCode": "5901970101009800abd8aab9daba1aba0aba3aab9eaba24888888888c8ca4c028006646526018005323299800980699807a4010005375c601a007375c601a601400948009222322323323001001229301300199499b8f375c602e00201133003003301200299baf3013001004180a800d280dd58031ba633011337600046ea00052f5bded8c06ea4005364801a930cc8c0040048a400644601a6eaa4cdd7980818069baa00200b99ba548000cc010010006004b0dd6180600098041baa300b004c999119911991800800914800c8a4c016400a44660280046602800297ae05284cc0100100054a200237560040026644664526020005300f300c0028008dd519911991800800914800c8a400a4526600e0100054c103d87a800099ba548000cc0500052f5c133006006003298103d87a80001bab0043752002464465266e4000c007266e3c00c007004c0098000dd70009bae0014c0101a000300b3300d48020c020dd518058021bae300b0012337106eb4c030c0200052000b5260c01c008dd5180498028015ad6b586ea8c020cc02920040013004375400201",
+      "hash": "1c541d7d28457ba8d485b1117c3894c0736969d958c45ceec8fcf13e"
+    }
+  ],
+  "scalus": {
+    "scalaVersion": "3.9.0"
+  }
+}

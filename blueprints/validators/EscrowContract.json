@@ -1,0 +1,73 @@
+{
+  "preamble": {
+    "title": "Escrow",
+    "description": "The buyer releases the price to the seller, or takes it back after the deadline.",
+    "version": "0.1.0",
+    "compiler": {
+      "name": "scalus",
+      "version": "1.4.0"
+    },
+    "plutusVersion": "v3",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "Escrow",
+      "description": "The buyer releases the price to the seller, or takes it back after the deadline.",
+      "redeemer": {
+        "title": "EscrowAction",
+        "schema": {
+          "title": "EscrowAction",
+          "anyOf": [
+            {
+              "dataType": "constructor",
+              "title": "Release",
+              "index": 0,
+              "fields": [
+                
+              ]
+            },
+            {
+              "dataType": "constructor",
+              "title": "Refund",
+              "index": 1,
+              "fields": [
+                
+              ]
+            }
+          ]
+        }
+      },
+      "datum": {
+        "title": "EscrowDatum",
+        "schema": {
+          "dataType": "constructor",
+          "title": "EscrowDatum",
+          "fields": [
+            {
+              "dataType": "bytes",
+              "title": "seller"
+            },
+            {
+              "dataType": "bytes",
+              "title": "buyer"
+            },
+            {
+              "dataType": "integer",
+              "title": "price"
+            },
+            {
+              "dataType": "integer",
+              "title": "deadline"
+            }
+          ]
+        }
+      },
+      "compiledCode": "5901660101009800abd8aab9daba1aba0aab9eaba248888888c8c8ca4c0240066c90034c8c8c8ca4c034dd518061804803cc8ca4cc8a64c044dd51991800800914800c8a4c01400a660080080033374a90001980980125eb814c0103d87a8000001528528a9469406eb0c038c0200108ca64cdd7980818071baa3010001004a5099b89375a6020601400f300148900a441009be33010300d0015ef94a13293012001a50a5099baf3011300f0010041baa3010300a00118069baa001b526180680299ba548000cc02cc03000d2f5c19337126eb4c030cc0392006003329300e001b4dd698069805800d86ea8c030c028dd5180618051baa300c3300e4803800ad49893322332300100122900191499baf00200599802002000d28a9400046eb0c02ccc035201000137526eb8c02cc02000ad49860106ea8c028014c01cdd51949805800cc028c020006c37546012600c002600c0036b5ac3754600e60020046010900218019baa00101",
+      "hash": "79ac3ebc488852f63dfa4c778d2e7505f24dd1648a7b4c9d6ee97620"
+    }
+  ],
+  "scalus": {
+    "scalaVersion": "3.9.0"
+  }
+}
