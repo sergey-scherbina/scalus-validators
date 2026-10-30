@@ -38,6 +38,13 @@ Security cases have their own tests: double satisfaction (one payment settling t
 secretly mints, a key listed twice in a multisig datum, a zero threshold, a missing datum, an unbounded
 validity range.
 
+## In a debugger
+
+`CaseFilesSpec` writes a failing case (Vesting's early claim) to `target/okay-uplc/vesting-early-claim.json` with
+okay-cardano's `CaseFile`: the script with its Scala positions and the context. Open it in
+[okay-uplc](https://okay-uplc.okay-effects.workers.dev) ("A case file…"): it lands on the failing step, the line
+`require(d.deadline <= …)` marked.
+
 ## For the off-chain side (cardano-cli)
 
 ```sh
