@@ -21,7 +21,7 @@ sbt test            # 32 tests: unit, property-based, emulator, a case file for 
 sbt blueprintCheck  # plutus.json matches the code
 ```
 
-Requires a JDK (17+) and sbt. The Scalus compiler plugin turns every `@Compile` object into Untyped Plutus Core.
+Requires a JDK (17+) and sbt. CI for GitHub Actions: `ci/github-actions.yml` (copy it to `.github/workflows/`). The Scalus compiler plugin turns every `@Compile` object into Untyped Plutus Core.
 
 ## Tests
 
