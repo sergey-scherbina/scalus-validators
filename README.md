@@ -4,6 +4,9 @@ Cardano smart contracts in Scala 3 with [Scalus](https://scalus.org) 1.4: three 
 policy, Plutus V3, each covered by unit tests, ScalaCheck properties and end-to-end transactions on Scalus's
 in-memory ledger.
 
+Step through them in the browser: [okay-uplc](https://okay-uplc.okay-effects.workers.dev), a debugger for Cardano
+scripts built on Scalus — these validators are its bundled examples.
+
 | Validator | Purpose | What it checks | Size |
 |---|---|---|---|
 | [Vesting](src/main/scala/validators/Vesting.scala) | spend | `Claim`: beneficiary signs, validity range at or after the deadline. `Cancel`: owner signs, range before it | 280 B |
@@ -14,7 +17,7 @@ in-memory ledger.
 ## Build and test
 
 ```sh
-sbt test            # 31 tests: unit, property-based, emulator
+sbt test            # 32 tests: unit, property-based, emulator, a case file for the debugger
 sbt blueprintCheck  # plutus.json matches the code
 ```
 
