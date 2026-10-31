@@ -49,8 +49,12 @@ scripts, through okay-cardano-dev (a test dependency):
 ```sh
 sbt ~test                                             # writes target/okay-uplc/workspace.json on every change
 sbt "Test/runMain okay.cardano.dev.DevServer"         # another terminal: serves it on http://127.0.0.1:8790
-open "https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790"
+open "http://127.0.0.1:8790/?workspace=http://127.0.0.1:8790"
 ```
+
+The dev server serves the page too, so the page and the project share one origin. From the site itself
+(`https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790`) the browser first asks whether the page
+may reach this machine.
 
 - `Workbench` writes the workspace (each contract's debug build: error traces, Scala positions, schemas) and runs
   every scenario in `okay-uplc/scenarios/` — one call of a validator each (datum, redeemer, the transaction's
