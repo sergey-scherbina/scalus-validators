@@ -44,17 +44,19 @@ validity range.
 ## Working on them in okay-uplc
 
 The contracts are developed with [okay-uplc](https://okay-uplc.okay-effects.workers.dev), a debugger for Cardano
-scripts, through okay-cardano-dev (a test dependency):
+scripts, through its sbt plugin (`project/plugins.sbt`: `addSbtPlugin("io.github.okay-effects" % "sbt-okay-uplc" %
+"0.1.0")`):
 
 ```sh
-sbt ~test                                             # writes target/okay-uplc/workspace.json on every change
-sbt "Test/runMain okay.cardano.dev.DevServer"         # another terminal: serves it on http://127.0.0.1:8790
+sbt okayUplcServe        # the contracts' debug builds as a workspace, served with the page on http://127.0.0.1:8790
 open "http://127.0.0.1:8790/?workspace=http://127.0.0.1:8790"
+sbt okayUplcVerify       # every scenario in okay-uplc/scenarios as it expects; a wrong one fails with its link
 ```
 
-The dev server serves the page too, so the page and the project share one origin. From the site itself
-(`https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790`) the browser first asks whether the page
-may reach this machine.
+In an sbt shell, `okayUplcStart` serves in the background and `~okayUplcWorkspace` writes the workspace again on
+every change; the page sees it and shows the budgets that moved. From the site itself
+(`https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790`) the browser first asks whether the
+page may reach this machine.
 
 - `Workbench` writes the workspace (each contract's debug build: error traces, Scala positions, schemas) and runs
   every scenario in `okay-uplc/scenarios/` — one call of a validator each (datum, redeemer, the transaction's
