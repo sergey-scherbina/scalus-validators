@@ -53,6 +53,11 @@ open "http://127.0.0.1:8790/?workspace=http://127.0.0.1:8790"
 sbt okayUplcVerify       # every scenario in okay-uplc/scenarios as it expects; a wrong one fails with its link
 ```
 
+Or, in Chrome or Edge, with no server: `sbt okayUplcWorkspace`, then on the site "Connect your project…" → "Choose the
+project's folder…" and pick this folder. The page reads the workspace and the scenarios from it and saves new
+scenarios into it. "Builds…" compiles a contract again from its SIR, right in the page, and compares the builds;
+"SIR…" shows the SIR itself.
+
 In an sbt shell, `okayUplcStart` serves in the background and `~okayUplcWorkspace` writes the workspace again on
 every change; the page sees it and shows the budgets that moved. From the site itself
 (`https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790`) the browser first asks whether the
