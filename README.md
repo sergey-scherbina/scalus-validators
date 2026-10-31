@@ -41,12 +41,22 @@ Security cases have their own tests: double satisfaction (one payment settling t
 secretly mints, a key listed twice in a multisig datum, a zero threshold, a missing datum, an unbounded
 validity range.
 
-## In a debugger
+## Working on them in okay-uplc
 
-`CaseFilesSpec` writes a failing case (Vesting's early claim) to `target/okay-uplc/vesting-early-claim.json` with
-okay-cardano's `CaseFile`: the script with its Scala positions and the context. Open it in
-[okay-uplc](https://okay-uplc.okay-effects.workers.dev) ("A case file…"): it lands on the failing step, the line
-`require(d.deadline <= …)` marked.
+The contracts are developed with [okay-uplc](https://okay-uplc.okay-effects.workers.dev), a debugger for Cardano
+scripts, through okay-cardano-dev (a test dependency):
+
+```sh
+sbt ~test                                             # writes target/okay-uplc/workspace.json on every change
+sbt "Test/runMain okay.cardano.dev.DevServer"         # another terminal: serves it on http://127.0.0.1:8790
+open "https://okay-uplc.okay-effects.workers.dev/?workspace=http://127.0.0.1:8790"
+```
+
+- `Workbench` writes the workspace (each contract's debug build: error traces, Scala positions, schemas) and runs
+  every scenario in `okay-uplc/scenarios/` — one call of a validator each (datum, redeemer, the transaction's
+  fields) with what it should do. The page lists them, steps through any at its Scala line, and saves new ones into
+  the folder; the tests keep them true.
+- `CaseFilesSpec` writes a single failing case as a file the page opens ("A case file…").
 
 ## For the off-chain side (cardano-cli)
 

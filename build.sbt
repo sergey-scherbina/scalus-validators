@@ -14,7 +14,7 @@ lazy val root = (project in file("."))
         "org.scalatest" %% "scalatest" % "3.2.20" % Test,
         "org.scalatestplus" %% "scalacheck-1-18" % "3.2.19.0" % Test,
         // a failing case written as a file okay-uplc opens (CaseFilesSpec)
-        "io.github.okay-effects" %% "okay-cardano" % "0.1.0" % Test
+        "io.github.okay-effects" %% "okay-cardano-dev" % "0.1.0" % Test
       ),
       resolvers ++= Seq(
         "okay-effects" at "https://okay-effects.github.io/okay-simple/maven",

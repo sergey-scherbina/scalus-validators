@@ -1,0 +1,52 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "One-shot NFT: minted once, the seed spent",
+  "validator": "One-shot NFT",
+  "purpose": "mint",
+  "parameters": [
+    {
+      "constructor": 0,
+      "fields": [
+        {
+          "bytes": "0505050505050505050505050505050505050505050505050505050505050505"
+        },
+        {
+          "int": 0
+        }
+      ]
+    }
+  ],
+  "datum": null,
+  "redeemer": {
+    "constructor": 0,
+    "fields": [
+      {
+        "bytes": "617274776f726b2d31"
+      }
+    ]
+  },
+  "transaction": {
+    "signatories": [],
+    "validFrom": null,
+    "validTo": null,
+    "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0",
+    "lovelace": 5000000,
+    "payments": [],
+    "mint": [
+      {
+        "policy": "self",
+        "name": "617274776f726b2d31",
+        "quantity": 1
+      }
+    ],
+    "spends": [
+      "0505050505050505050505050505050505050505050505050505050505050505#0"
+    ]
+  },
+  "expect": {
+    "verdict": "passes",
+    "message": null,
+    "maxMemory": null,
+    "maxCpu": null
+  }
+}

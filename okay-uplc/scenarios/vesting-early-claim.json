@@ -1,0 +1,43 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "Vesting: a claim one millisecond early",
+  "validator": "Vesting",
+  "purpose": "spend",
+  "parameters": [],
+  "datum": {
+    "constructor": 0,
+    "fields": [
+      {
+        "bytes": "01010101010101010101010101010101010101010101010101010101"
+      },
+      {
+        "bytes": "02020202020202020202020202020202020202020202020202020202"
+      },
+      {
+        "int": 1000000
+      }
+    ]
+  },
+  "redeemer": {
+    "constructor": 0,
+    "fields": []
+  },
+  "transaction": {
+    "signatories": [
+      "02020202020202020202020202020202020202020202020202020202"
+    ],
+    "validFrom": 999999,
+    "validTo": null,
+    "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0",
+    "lovelace": 5000000,
+    "payments": [],
+    "mint": [],
+    "spends": []
+  },
+  "expect": {
+    "verdict": "fails",
+    "message": "Claim before the deadline",
+    "maxMemory": null,
+    "maxCpu": null
+  }
+}

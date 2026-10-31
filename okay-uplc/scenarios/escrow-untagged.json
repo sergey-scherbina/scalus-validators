@@ -1,0 +1,52 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "Escrow: a payment not tagged with this escrow",
+  "validator": "Escrow",
+  "purpose": "spend",
+  "parameters": [],
+  "datum": {
+    "constructor": 0,
+    "fields": [
+      {
+        "bytes": "01010101010101010101010101010101010101010101010101010101"
+      },
+      {
+        "bytes": "02020202020202020202020202020202020202020202020202020202"
+      },
+      {
+        "int": 50000000
+      },
+      {
+        "int": 1000000
+      }
+    ]
+  },
+  "redeemer": {
+    "constructor": 0,
+    "fields": []
+  },
+  "transaction": {
+    "signatories": [
+      "02020202020202020202020202020202020202020202020202020202"
+    ],
+    "validFrom": null,
+    "validTo": null,
+    "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0",
+    "lovelace": 50000000,
+    "payments": [
+      {
+        "to": "01010101010101010101010101010101010101010101010101010101",
+        "lovelace": 50000000,
+        "datum": null
+      }
+    ],
+    "mint": [],
+    "spends": []
+  },
+  "expect": {
+    "verdict": "fails",
+    "message": "Seller must be paid",
+    "maxMemory": null,
+    "maxCpu": null
+  }
+}

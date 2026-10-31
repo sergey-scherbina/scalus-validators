@@ -1,0 +1,51 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "Multisig: two of three sign",
+  "validator": "Multisig",
+  "purpose": "spend",
+  "parameters": [],
+  "datum": {
+    "constructor": 0,
+    "fields": [
+      {
+        "list": [
+          {
+            "bytes": "01010101010101010101010101010101010101010101010101010101"
+          },
+          {
+            "bytes": "02020202020202020202020202020202020202020202020202020202"
+          },
+          {
+            "bytes": "03030303030303030303030303030303030303030303030303030303"
+          }
+        ]
+      },
+      {
+        "int": 2
+      }
+    ]
+  },
+  "redeemer": {
+    "constructor": 0,
+    "fields": []
+  },
+  "transaction": {
+    "signatories": [
+      "01010101010101010101010101010101010101010101010101010101",
+      "02020202020202020202020202020202020202020202020202020202"
+    ],
+    "validFrom": null,
+    "validTo": null,
+    "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0",
+    "lovelace": 5000000,
+    "payments": [],
+    "mint": [],
+    "spends": []
+  },
+  "expect": {
+    "verdict": "passes",
+    "message": null,
+    "maxMemory": null,
+    "maxCpu": null
+  }
+}
