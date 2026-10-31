@@ -59,7 +59,8 @@ may reach this machine.
 - `Workbench` writes the workspace (each contract's debug build: error traces, Scala positions, schemas) and runs
   every scenario in `okay-uplc/scenarios/` — one call of a validator each (datum, redeemer, the transaction's
   fields) with what it should do. The page lists them, steps through any at its Scala line, and saves new ones into
-  the folder; the tests keep them true.
+  the folder; the tests keep them true. A scenario that is not as it expects fails the test with a link that opens
+  its run in the debugger at the step before the end — the Scala line where it failed.
 - `CaseFilesSpec` writes a single failing case as a file the page opens ("A case file…").
 
 ## For the off-chain side (cardano-cli)
