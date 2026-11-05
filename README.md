@@ -22,6 +22,7 @@ scripts built on Scalus — these validators are its bundled examples.
 ```sh
 sbt test            # 76 tests: unit, property-based, emulator, a case file for the debugger
 sbt blueprintCheck  # plutus.json matches the code
+sbt okayUplcAttack  # every passing scenario attacked (double satisfaction, redirect, dust, forged state, …)
 ```
 
 Requires a JDK (17+) and sbt. CI for GitHub Actions: `ci/github-actions.yml` (copy it to `.github/workflows/`). The Scalus compiler plugin turns every `@Compile` object into Untyped Plutus Core.

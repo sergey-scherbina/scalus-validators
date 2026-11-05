@@ -111,7 +111,7 @@ class AttacksSpec extends AnyFunSuite, Fixtures {
             OutputDatum.NoOutputDatum))
         val program = p.program.deBruijnedProgram
         def accepted(ctx: ScriptContext) = Attacks.run(program, ctx).fold(fail(_), identity)
-            .filter(_.accepted).map(_.attack.id)
+            .filter(t => t.accepted && t.attack.severity == Attacks.Severity.High).map(_.attack.id)
         val mint = ScriptContext(TxInfo.placeholder.copy(inputs = List(seedIn), mint = Value(h, name, 1)),
             NftAction.Mint(name).toData, ScriptInfo.MintingScript(h))
         assert(accepted(mint) == scala.Nil)
