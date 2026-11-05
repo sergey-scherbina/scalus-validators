@@ -9,7 +9,7 @@ import org.scalatest.funsuite.AnyFunSuite
   */
 class Workbench extends AnyFunSuite {
     private val contracts = List(VestingContract, EscrowContract, MultisigContract, OneShotNftContract,
-        StateCounterContract, ListingContract)
+        StateCounterContract, ListingContract, ArbitratedEscrowContract)
 
     test("the workspace is written") {
         val file = Workspace.write(contracts*)

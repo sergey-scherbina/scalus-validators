@@ -82,3 +82,15 @@ object ListingContract extends Contract {
       compiled = compiled
     )
 }
+
+object ArbitratedEscrowContract extends Contract {
+    private given Options = Options.release
+    lazy val compiled = PlutusV3.compile(ArbitratedEscrow.validate)
+    lazy val blueprint = Blueprint.plutusV3[ArbitratedEscrowDatum, ArbitratedEscrowAction](
+      title = "Arbitrated escrow",
+      description = "Any two of buyer, seller and arbiter release the escrow to the seller or refund it to the buyer.",
+      version = "0.1.0",
+      license = Some("Apache-2.0"),
+      compiled = compiled
+    )
+}

@@ -1,0 +1,69 @@
+{
+  "preamble": {
+    "title": "Arbitrated escrow",
+    "description": "Any two of buyer, seller and arbiter release the escrow to the seller or refund it to the buyer.",
+    "version": "0.1.0",
+    "compiler": {
+      "name": "scalus",
+      "version": "1.4.0"
+    },
+    "plutusVersion": "v3",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "Arbitrated escrow",
+      "description": "Any two of buyer, seller and arbiter release the escrow to the seller or refund it to the buyer.",
+      "redeemer": {
+        "title": "ArbitratedEscrowAction",
+        "schema": {
+          "title": "ArbitratedEscrowAction",
+          "anyOf": [
+            {
+              "dataType": "constructor",
+              "title": "Release",
+              "index": 0,
+              "fields": [
+                
+              ]
+            },
+            {
+              "dataType": "constructor",
+              "title": "Refund",
+              "index": 1,
+              "fields": [
+                
+              ]
+            }
+          ]
+        }
+      },
+      "datum": {
+        "title": "ArbitratedEscrowDatum",
+        "schema": {
+          "dataType": "constructor",
+          "title": "ArbitratedEscrowDatum",
+          "fields": [
+            {
+              "dataType": "bytes",
+              "title": "seller"
+            },
+            {
+              "dataType": "bytes",
+              "title": "buyer"
+            },
+            {
+              "dataType": "bytes",
+              "title": "arbiter"
+            }
+          ]
+        }
+      },
+      "compiledCode": "5901c00101009800abd8aab9daba1aba0aab9eaba24888888c88c8c8ca4c0280066c90034c8c8c8c8c8c8c8c8c8c8ca4cc8a64c05cdd51991800800914800c8a4c01400a66008008003300a330190024bd70298103d87a8000001528528a9469406eb0c050c0340248ca64cdd7980b180a1baa3016001003a5099b890043012301630130015284ca4c06000694294266ebcc05cc0540040186ea8c058c03c00460266ea8006d498600666025260286ea8c04cc04003600b00625eb80c038c048c03cc040dd5180918079991800800914800c88c050dd5499baf30163014375400400b3006330040040018012c3758602400e60220106e95200093371290021919b8033701260026eb800e9000520024cc99baf002003a51a505284c004dd700129000520024994cc99baf00100499baf001003a51528d28294260046eb80046020601200948002900108cc88cc8c0040048a400645266ebc008016660080080034a2a500011bac30103301248040014dd4800da930c038008c034c028004c028dd500118049baa300b005329300c00198059804800d86ea8c028c01c004c01c006d6b586ea8c020c004008c02520043004375400253001488100a441009be30015ef81",
+      "hash": "15c72cec6d33e15cab3921d1685c3a4ce1ba352823fe969fd1f8f7f3"
+    }
+  ],
+  "scalus": {
+    "scalaVersion": "3.9.0"
+  }
+}
