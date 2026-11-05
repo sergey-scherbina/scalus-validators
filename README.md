@@ -1,8 +1,8 @@
 # scalus-validators
 
-Cardano smart contracts in Scala 3 with [Scalus](https://scalus.org) 1.4: three spend validators and one minting
-policy, Plutus V3, each covered by unit tests, ScalaCheck properties and end-to-end transactions on Scalus's
-in-memory ledger.
+Cardano smart contracts in Scala 3 with [Scalus](https://scalus.org) 1.4: four spend validators, one minting
+policy and a state machine that is both, Plutus V3, covered by unit tests, ScalaCheck properties and end-to-end
+transactions on Scalus's in-memory ledger.
 
 Step through them in the browser: [okay-uplc](https://okay-uplc.okay-effects.workers.dev), a debugger for Cardano
 scripts built on Scalus — these validators are its bundled examples.
@@ -13,11 +13,13 @@ scripts built on Scalus — these validators are its bundled examples.
 | [Escrow](src/main/scala/validators/Escrow.scala) | spend | `Release`: buyer signs, the seller is paid at least the price **in an output tagged with the escrow's own reference** (no double satisfaction). `Refund`: buyer signs after the deadline | 361 B |
 | [Multisig](src/main/scala/validators/Multisig.scala) | spend | N-of-M: at least `threshold` of `signers` sign; signatures counted over the ledger's unique signatories; threshold must be positive | 206 B |
 | [OneShotNft](src/main/scala/validators/OneShotNft.scala) | mint | parameterized by a seed UTxO: `Mint(name)` needs the seed spent and mints exactly one token, nothing else; `Burn` only burns | 410 B |
+| [StateCounter](src/main/scala/validators/StateCounter.scala) | mint + spend | a state machine guarded by a state NFT (one script: the policy id is the script hash). `Init` mints the one NFT from a seed into the script with count 0; `Increment`: the input carries the NFT, one script input and one output, same full address, only ada and the NFT, ada kept, count + 1, owner signs; `Close` burns the NFT | 1286 B |
+| [Listing](src/main/scala/validators/Listing.scala) | spend | a marketplace listing. `Buy`: the seller is paid the price **in an output tagged with the listing's reference**, so one payment cannot buy two listings; `Cancel`: the seller signs | 322 B |
 
 ## Build and test
 
 ```sh
-sbt test            # 32 tests: unit, property-based, emulator, a case file for the debugger
+sbt test            # 54 tests: unit, property-based, emulator, a case file for the debugger
 sbt blueprintCheck  # plutus.json matches the code
 ```
 
@@ -37,7 +39,10 @@ Three levels, the same for every validator:
   `TxBuilder` and submitted to the `Emulator` ledger: lock and claim a vesting; mint an NFT from a seed, then
   show that the same policy can never mint again.
 
-Security cases have their own tests: double satisfaction (one payment settling two escrows), a burn that
+Security cases have their own tests: double satisfaction (one payment settling two escrows), the same attack
+succeeding on a naive listing
+([NaiveListing](src/test/scala/validators/NaiveListing.scala), tests only) and refused by Listing, every attack on the state machine (forged state without the NFT, NFT taken out, token dust, ada drained,
+another stake credential, a wrong transition, a second script input, close without the burn), a burn that
 secretly mints, a key listed twice in a multisig datum, a zero threshold, a missing datum, an unbounded
 validity range.
 

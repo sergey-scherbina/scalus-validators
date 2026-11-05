@@ -57,3 +57,28 @@ object OneShotNftContract extends Contract {
       compiled = compiled.asInstanceOf[PlutusV3[TxOutRef => Data => Unit]]
     )
 }
+
+object StateCounterContract extends Contract {
+    private given Options = Options.release
+    lazy val compiled = PlutusV3.compile(StateCounter.validate)
+    lazy val blueprint = Blueprint.plutusV3[TxOutRef, CounterState, CounterAction](
+      title = "State counter",
+      description = "A state machine whose one valid state carries an NFT minted once from a seed UTxO.",
+      version = "0.1.0",
+      license = Some("Apache-2.0"),
+      // as for OneShotNft: the seed is applied as Data; the cast only relabels the phantom type
+      compiled = compiled.asInstanceOf[PlutusV3[TxOutRef => Data => Unit]]
+    )
+}
+
+object ListingContract extends Contract {
+    private given Options = Options.release
+    lazy val compiled = PlutusV3.compile(Listing.validate)
+    lazy val blueprint = Blueprint.plutusV3[ListingDatum, ListingAction](
+      title = "Listing",
+      description = "A marketplace listing: whoever pays the seller the price, tagged with the listing, takes it.",
+      version = "0.1.0",
+      license = Some("Apache-2.0"),
+      compiled = compiled
+    )
+}

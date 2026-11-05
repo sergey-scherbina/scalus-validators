@@ -1,0 +1,65 @@
+{
+  "preamble": {
+    "title": "Listing",
+    "description": "A marketplace listing: whoever pays the seller the price, tagged with the listing, takes it.",
+    "version": "0.1.0",
+    "compiler": {
+      "name": "scalus",
+      "version": "1.4.0"
+    },
+    "plutusVersion": "v3",
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "Listing",
+      "description": "A marketplace listing: whoever pays the seller the price, tagged with the listing, takes it.",
+      "redeemer": {
+        "title": "ListingAction",
+        "schema": {
+          "title": "ListingAction",
+          "anyOf": [
+            {
+              "dataType": "constructor",
+              "title": "Buy",
+              "index": 0,
+              "fields": [
+                
+              ]
+            },
+            {
+              "dataType": "constructor",
+              "title": "Cancel",
+              "index": 1,
+              "fields": [
+                
+              ]
+            }
+          ]
+        }
+      },
+      "datum": {
+        "title": "ListingDatum",
+        "schema": {
+          "dataType": "constructor",
+          "title": "ListingDatum",
+          "fields": [
+            {
+              "dataType": "bytes",
+              "title": "seller"
+            },
+            {
+              "dataType": "integer",
+              "title": "price"
+            }
+          ]
+        }
+      },
+      "compiledCode": "59013f0101009800abd8aab9daba1aba0aab9eaba248888888c8c8ca4c0240066c90034c8ca4c02cdd518051803802cc8c8ca4cc8a64c040dd51991800800914800c8a4c01400a660080080033374a90001980900125eb814c0103d87a8000001528528a9469406eb0c034c01cc02cdd518068041194c99baf300f300d3754601e0020094a1337126eb4c03cc030016600291100a441009be3300f300c0015ef94a13293011001a50a5099baf3010300e0010041baa300f300900118061baa001b526180600219ba548000cc028c02c0052f5c060106ea800726644664466460020024520032293375e00400b33004004001a515280008dd6180619807240200046ea4004c020dd518050029bae300a300837540036a4c1949805800cc028c020006c37546012600c002600c0036b5ac3754600e60020046010900218019baa00101",
+      "hash": "f52076364d8a5f99f159df99fd8c6e98b64be1c62c890fd1e81fdd0d"
+    }
+  ],
+  "scalus": {
+    "scalaVersion": "3.9.0"
+  }
+}
