@@ -40,11 +40,11 @@ Three levels, the same for every validator:
   show that the same policy can never mint again.
 
 Security cases have their own tests: double satisfaction (one payment settling two escrows), the same attack
-succeeding on a naive listing
-([NaiveListing](src/test/scala/validators/NaiveListing.scala), tests only) and refused by Listing, every attack on the state machine (forged state without the NFT, NFT taken out, token dust, ada drained,
-another stake credential, a wrong transition, a second script input, close without the burn), a burn that
-secretly mints, a key listed twice in a multisig datum, a zero threshold, a missing datum, an unbounded
-validity range.
+succeeding on a naive listing ([NaiveListing](src/test/scala/validators/NaiveListing.scala), tests only) and
+refused by Listing, every attack on the state machine (forged state without the NFT, NFT taken out, token dust, ada
+drained, another stake credential, a wrong transition, a second script input, close without the burn), a burn that
+secretly mints, a key listed twice in a multisig datum, a zero threshold, a missing datum, an unbounded validity
+range.
 
 ## Working on them in okay-uplc
 
