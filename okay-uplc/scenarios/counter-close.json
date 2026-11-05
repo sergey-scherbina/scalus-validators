@@ -1,0 +1,12 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "State counter: closed, the state token burned",
+  "validator": "State counter",
+  "purpose": "spend",
+  "parameters": [{"constructor": 0, "fields": [{"bytes": "0505050505050505050505050505050505050505050505050505050505050505"}, {"int": 0}]}],
+  "datum": {"constructor": 0, "fields": [{"bytes": "01010101010101010101010101010101010101010101010101010101"}, {"int": 0}]},
+  "redeemer": {"constructor": 1, "fields": []},
+  "transaction": {"signatories": ["01010101010101010101010101010101010101010101010101010101"], "validFrom": null, "validTo": null, "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0", "lovelace": 2000000,
+    "tokens": [{"policy": "self", "name": "5354415445", "quantity": 1}], "payments": [], "mint": [{"policy": "self", "name": "5354415445", "quantity": -1}], "spends": []},
+  "expect": {"verdict": "passes", "message": null, "maxMemory": null, "maxCpu": null}
+}
