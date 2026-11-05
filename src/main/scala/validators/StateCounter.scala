@@ -30,6 +30,8 @@ enum CounterMint derives FromData, ToData:
   *   - NFT MINTED ELSEWHERE / TWICE: mint `Init` requires the seed spent, exactly one token of this policy, and that
   *     token placed at this script's address with a valid initial state.
   *   - DOUBLE SATISFACTION: exactly one input from this script and exactly one output back to it per transaction.
+  *   - STAKE HIJACK AT BIRTH: `Init` puts the state at the script address with NO stake part (found by okay-cardano
+  *     `Attacks`: an update keeps the address, so a stake part chosen at `Init` would stay forever).
   *   - NFT STOLEN / STATE MOVED: the continuing output goes to the SAME address (its stake part too) and carries the
   *     NFT; an update mints nothing of this policy.
   *   - TOKEN DUST (an UTxO bloated with junk tokens until it costs too much to spend): the state's output holds ada
@@ -55,6 +57,8 @@ object StateCounter extends DataParameterizedValidator {
                 val outs = tx.findOutputsByCredential(home)
                 require(outs.length == BigInt(1), OneStateOutput)
                 val out = outs.head
+                // no stake part: every update keeps the address, so a stake part chosen here would be kept forever
+                require(out.address.stakingCredential.isEmpty, NoStakeAtInit)
                 require(holdsOnlyState(out.value, policyId), OnlyAdaAndNft)
                 val st = inlineState(out)
                 require(st.count == BigInt(0), BadInitialState)
@@ -114,6 +118,7 @@ object StateCounter extends DataParameterizedValidator {
     inline val MintExactlyOne = "exactly one state token is minted"
     inline val OneStateOutput = "exactly one output to the script"
     inline val OnlyAdaAndNft = "the state holds ada and the NFT only"
+    inline val NoStakeAtInit = "the state starts at the script address with no stake part"
     inline val BadInitialState = "the count starts at 0"
     inline val OwnerMustSign = "the owner signs"
     inline val BurnExactlyOne = "burn exactly one state token"

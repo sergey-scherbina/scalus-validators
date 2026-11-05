@@ -47,6 +47,13 @@ class StateCounterSpec extends AnyFunSuite, Fixtures {
         assert(mint(List.Nil, List(stateOut(s0)), List(alice), nft).failsWith(StateCounter.SeedNotSpent))
     }
 
+    test("init with a stake part on the state address is rejected: it would stay forever") {
+        val staked = Address(Credential.ScriptCredential(policy),
+            POption.Some(StakingCredential.StakingHash(Credential.PubKeyCredential(eve))))
+        val r = mint(List(seedIn), List(stateOut(s0, at = staked)), List(alice), nft)
+        assert(r.failsWith(StateCounter.NoStakeAtInit))
+    }
+
     test("init sending the NFT anywhere but the script is rejected") {
         val away = TxOut(Address.fromPubKeyHash(alice), ada + nft, OutputDatum.OutputDatum(s0.toData))
         assert(mint(List(seedIn), List(away), List(alice), nft).failsWith(StateCounter.OneStateOutput))

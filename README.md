@@ -13,14 +13,14 @@ scripts built on Scalus — these validators are its bundled examples.
 | [Escrow](src/main/scala/validators/Escrow.scala) | spend | `Release`: buyer signs, the seller is paid at least the price **in an output tagged with the escrow's own reference** (no double satisfaction). `Refund`: buyer signs after the deadline (protects the buyer only: see ArbitratedEscrow) | 361 B |
 | [Multisig](src/main/scala/validators/Multisig.scala) | spend | N-of-M: at least `threshold` of `signers` sign; signatures counted over the ledger's unique signatories; threshold must be positive | 206 B |
 | [OneShotNft](src/main/scala/validators/OneShotNft.scala) | mint | parameterized by a seed UTxO: `Mint(name)` needs the seed spent and mints exactly one token, nothing else; `Burn` only burns | 410 B |
-| [StateCounter](src/main/scala/validators/StateCounter.scala) | mint + spend | a state machine guarded by a state NFT (one script: the policy id is the script hash). `Init` mints the one NFT from a seed into the script with count 0; `Increment`: the input carries the NFT, one script input and one output, same full address, only ada and the NFT, ada kept, count + 1, owner signs; `Close` burns the NFT | 1286 B |
+| [StateCounter](src/main/scala/validators/StateCounter.scala) | mint + spend | a state machine guarded by a state NFT (one script: the policy id is the script hash). `Init` mints the one NFT from a seed into the script with count 0, no stake part; `Increment`: the input carries the NFT, one script input and one output, same full address, only ada and the NFT, ada kept, count + 1, owner signs; `Close` burns the NFT | 1309 B |
 | [Listing](src/main/scala/validators/Listing.scala) | spend | a marketplace listing. `Buy`: the seller is paid the price **in an output tagged with the listing's reference**, so one payment cannot buy two listings; `Cancel`: the seller signs | 322 B |
 | [ArbitratedEscrow](src/main/scala/validators/ArbitratedEscrow.scala) | spend | escrow with an arbiter, 2 of 3: any two **distinct** keys of buyer, seller, arbiter sign; `Release` pays the seller, `Refund` the buyer, **all the escrow holds**, tagged with its reference; a key in two roles counts once | 451 B |
 
 ## Build and test
 
 ```sh
-sbt test            # 68 tests: unit, property-based, emulator, a case file for the debugger
+sbt test            # 76 tests: unit, property-based, emulator, a case file for the debugger
 sbt blueprintCheck  # plutus.json matches the code
 ```
 
@@ -39,6 +39,12 @@ Three levels, the same for every validator:
 - **End to end** ([EmulatorSpec](src/test/scala/validators/EmulatorSpec.scala)): real transactions built with
   `TxBuilder` and submitted to the `Emulator` ledger: lock and claim a vesting; mint an NFT from a seed, then
   show that the same policy can never mint again.
+
+Every contract is also ATTACKED by okay-cardano's `Attacks` ([AttacksSpec](src/test/scala/validators/AttacksSpec.scala)): its
+passing cases changed the way known exploits change a transaction (double satisfaction, redirect, stake redirect,
+stealing the continuing output, token dust, forged state, extra mint, sneaky burn). NaiveListing loses to double
+satisfaction; every other contract defends every attack. It found one hole here: StateCounter's `Init` let the
+state start at the script address with someone else's stake part, kept by every update — fixed.
 
 Security cases have their own tests: double satisfaction (one payment settling two escrows), the same attack
 succeeding on a naive listing ([NaiveListing](src/test/scala/validators/NaiveListing.scala), tests only) and
