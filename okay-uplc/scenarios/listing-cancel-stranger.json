@@ -1,0 +1,11 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "Listing: cancelled by someone else — refused",
+  "validator": "Listing",
+  "purpose": "spend",
+  "parameters": [],
+  "datum": {"constructor": 0, "fields": [{"bytes": "01010101010101010101010101010101010101010101010101010101"}, {"int": 10000000}]},
+  "redeemer": {"constructor": 1, "fields": []},
+  "transaction": {"signatories": ["42424242424242424242424242424242424242424242424242424242"], "validFrom": null, "validTo": null, "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0", "lovelace": 2000000, "payments": [], "mint": [], "spends": []},
+  "expect": {"verdict": "fails", "message": "only the seller cancels", "maxMemory": null, "maxCpu": null}
+}

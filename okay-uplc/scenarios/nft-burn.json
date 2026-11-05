@@ -1,0 +1,11 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "One-shot NFT: burned",
+  "validator": "One-shot NFT",
+  "purpose": "mint",
+  "parameters": [{"constructor": 0, "fields": [{"bytes": "0505050505050505050505050505050505050505050505050505050505050505"}, {"int": 0}]}],
+  "datum": null,
+  "redeemer": {"constructor": 1, "fields": []},
+  "transaction": {"signatories": [], "validFrom": null, "validTo": null, "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0", "lovelace": 5000000, "payments": [], "mint": [{"policy": "self", "name": "617274776f726b2d31", "quantity": -1}], "spends": []},
+  "expect": {"verdict": "passes", "message": null, "maxMemory": null, "maxCpu": null}
+}

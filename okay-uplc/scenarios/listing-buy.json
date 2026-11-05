@@ -1,0 +1,11 @@
+{
+  "okay-uplc-scenario": 1,
+  "name": "Listing: bought, the seller paid in an output tagged with the listing",
+  "validator": "Listing",
+  "purpose": "spend",
+  "parameters": [],
+  "datum": {"constructor": 0, "fields": [{"bytes": "01010101010101010101010101010101010101010101010101010101"}, {"int": 10000000}]},
+  "redeemer": {"constructor": 0, "fields": []},
+  "transaction": {"signatories": [], "validFrom": null, "validTo": null, "ownRef": "0000000000000000000000000000000000000000000000000000000000000000#0", "lovelace": 2000000, "payments": [{"to": "01010101010101010101010101010101010101010101010101010101", "lovelace": 10000000, "datum": "own"}], "mint": [], "spends": []},
+  "expect": {"verdict": "passes", "message": null, "maxMemory": null, "maxCpu": null}
+}
