@@ -20,7 +20,7 @@ scripts built on Scalus — these validators are its bundled examples.
 ## Build and test
 
 ```sh
-sbt test            # 76 tests: unit, property-based, emulator, a case file for the debugger
+sbt test            # 80 tests: unit, property-based, emulator, a case file for the debugger
 sbt blueprintCheck  # plutus.json matches the code
 sbt okayUplcAttack  # every passing scenario attacked (double satisfaction, redirect, dust, forged state, …)
 ```
@@ -46,6 +46,11 @@ passing cases changed the way known exploits change a transaction (double satisf
 stealing the continuing output, token dust, forged state, extra mint, sneaky burn). NaiveListing loses to double
 satisfaction; every other contract defends every attack. It found one hole here: StateCounter's `Init` let the
 state start at the script address with someone else's stake part, kept by every update — fixed.
+
+Each contract is also checked against its INTENT ([PropertySpec](src/test/scala/validators/PropertySpec.scala),
+okay-cardano's `Explore`): a passing case changed at random hundreds of times — amounts, payees, signers, tags, time,
+datum fields, actions — each change run on the script and judged by a rule written in plain Scala; any disagreement
+fails, shrunk to the fewest changes. NaiveListing against Listing's rule: the untagged payment found.
 
 Security cases have their own tests: double satisfaction (one payment settling two escrows), the same attack
 succeeding on a naive listing ([NaiveListing](src/test/scala/validators/NaiveListing.scala), tests only) and
